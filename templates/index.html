@@ -4,31 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AutoPrime - Concessionária</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}" />
 </head>
 <body>
     <header class="main-header">
         <div class="header-content">
             <div class="logo-area">
-                <img src="https://via.placeholder.com/80x50?text=Logo" alt="Logo AutoPrime" class="logo">
-                <h1 class="site-title">AutoPrime</h1>
+                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
+                <h1 class="site-title visually-hidden">AutoPrime</h1>
             </div>
             <p class="tagline">Seu próximo carro está aqui</p>
         </div>
         
         <nav class="main-nav">
             <ul class="nav-links">
-                <li><a href="index.html">Início</a></li>
-                <li><a href="estoque.html">Estoque</a></li>
-                <li><a href="servicos.html">Serviços</a></li> <li><a href="contato.html">Contato</a></li>
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
+                <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
             </ul>
             <div class="auth-links">
-                <a href="login.html" class="btn btn-login">Login</a>
-                <a href="cadastro.html" class="btn btn-cadastro">Cadastro</a>
+                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+                <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
             </div>
         </nav>
     </header>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages-container">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     <main class="main-content">
         <section class="about-section">
             <h2>Bem-vindo à AutoPrime!</h2>
@@ -46,9 +59,9 @@
         <section class="carousel-section">
             <div class="carousel-container">
                 <div class="carousel-images">
-                    <img src="" alt="Carro Exemplo 1" class="carousel-image active">
-                    <img src="" alt="Carro Exemplo 2" class="carousel-image">
-                    <img src="" alt="Carro Exemplo 3" class="carousel-image">
+                    <img src="{{ url_for('static', filename='imagens/carro1.jpg') }}" alt="Carro Exemplo 1" class="carousel-image active">
+                    <img src="{{ url_for('static', filename='imagens/carro2.jpg') }}" alt="Carro Exemplo 2" class="carousel-image">
+                    <img src="{{ url_for('static', filename='imagens/carro3.jpg') }}" alt="Carro Exemplo 3" class="carousel-image">
                 </div>
             </div>
         </section>
@@ -58,6 +71,6 @@
         <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
     </footer>
 
-    <script src="index.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>

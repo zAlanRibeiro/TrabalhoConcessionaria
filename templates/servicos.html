@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPrime - Nossos Serviços</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
+                <h1 class="site-title visually-hidden">AutoPrime</h1>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
+                <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+                <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
+            </div>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages-container">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        <section class="page-section">
+            <h2>Serviços Automotivos da AutoPrime</h2>
+            <p>Na AutoPrime, oferecemos uma gama completa de serviços para garantir a sua satisfação e a longevidade do seu veículo.</p>
+            <ul>
+                <li>Financiamento Facilitado: Opções flexíveis para você realizar o seu sonho.</li>
+                <li>Avaliação de Usados: Troque seu carro com a melhor avaliação do mercado.</li>
+                <li>Test Drive Agendado: Experimente o seu futuro carro antes de decidir.</li>
+                <li>Pós-Venda e Manutenção: Suporte completo após a compra.</li>
+                <li>Consórcio e Seguros: Soluções completas para proteger seu investimento.</li>
+            </ul>
+            <p>Entre em contato para saber mais sobre como podemos te ajudar!</p>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
+    </footer>
+
+    </body>
+</html>

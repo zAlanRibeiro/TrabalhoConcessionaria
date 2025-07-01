@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPrime - Contato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
+                <h1 class="site-title visually-hidden">AutoPrime</h1>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
+                <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+                <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
+            </div>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages-container">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main class="main-content form-page">
+        <section class="form-section">
+            <h2>Entre em Contato</h2>
+            <p>Tem alguma dúvida, sugestão ou gostaria de agendar uma visita? Preencha o formulário abaixo ou utilize nossos contatos diretos.</p>
+            <form action="{{ url_for('contato') }}" method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="name">Seu Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Seu E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Assunto:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-cadastro full-width">Enviar Mensagem</button>
+            </form>
+            <div class="contact-info" style="margin-top: 2rem; text-align: center;">
+                <h3>Outras Formas de Contato:</h3>
+                <p><strong>Telefone:</strong> (XX) XXXX-XXXX</p>
+                <p><strong>WhatsApp:</strong> (XX) XXXXX-XXXX</p>
+                <p><strong>Endereço:</strong> Rua da Concessionária, 123 - Cidade/Estado</p>
+                <p><strong>Horário de Funcionamento:</strong> Seg-Sex: 9h-18h | Sáb: 9h-13h</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
+    </footer>
+
+    </body>
+</html>

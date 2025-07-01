@@ -26,15 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    function nextImage() {
-        showImage(currentIndex + 1);
-    }
-
-    function prevImage() {
-        showImage(currentIndex - 1);
-    }
-
     function startAutoSlide() {
         autoSlideInterval = setInterval(nextImage, 4000);
     }
