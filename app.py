@@ -4,9 +4,6 @@ app = Flask(__name__)
 
 # Configuração da SECRET_KEY (essencial para sessões e mensagens flash)
 # EM PRODUÇÃO, NUNCA DEIXE UMA CHAVE ASSIM. GERE UMA CHAVE SEGURA E LONGA!
-# Exemplo de como gerar uma chave segura (execute no Python Shell):
-# import os
-# os.urandom(24)
 app.secret_key = 'be6b8535e881eb6974fa7d60ff055c96ccf65f451edabd83' 
 
 @app.route('/')
