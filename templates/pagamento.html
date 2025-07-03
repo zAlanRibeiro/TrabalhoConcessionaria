@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPrime - Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
+                <h1 class="site-title visually-hidden">AutoPrime</h1>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Início</a></li>
+                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
+                <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+            <div class="auth-links">
+                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+                <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
+            </div>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages-container">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main class="main-content form-page"> <section class="form-section"> <h2>Finalizar Pagamento</h2>
+            
+            <form action="{{ url_for('processar_pagamento') }}" method="POST" class="auth-form">
+                
+                <div class="form-group">
+                    <label for="card-holder">Nome no Cartão:</label>
+                    <input type="text" id="card-holder" name="card_holder" required placeholder="Nome completo como no cartão">
+                </div>
+                
+                <div class="form-group">
+                    <label for="card-number">Número do Cartão:</label>
+                    <input type="text" id="card-number" name="card_number" required placeholder="0000 0000 0000 0000">
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <div class="form-group" style="flex: 3;"> <label for="expiry-date">Validade:</label>
+                        <input type="text" id="expiry-date" name="expiry_date" required placeholder="MM/AA">
+                    </div>
+                    <div class="form-group" style="flex: 2;"> <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" required placeholder="123">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-login full-width">Pagar Agora</button>
+                
+                <p class="form-link">Pagamento seguro e protegido.</p>
+            </form>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
