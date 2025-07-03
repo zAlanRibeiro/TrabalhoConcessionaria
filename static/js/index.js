@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    //Carrossel
     const carouselImages = document.querySelector('.carousel-images');
     const images = document.querySelectorAll('.carousel-images .carousel-image');
 
@@ -41,4 +42,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showImage(currentIndex);
     startAutoSlide();
+});
+
+const flashMessages = document.querySelectorAll('.flash-message');
+flashMessages.forEach(function(message) {
+    setTimeout(() => {
+        message.classList.add('fade-out');
+        setTimeout(() => {
+            message.style.display = 'none';
+        }, 600); 
+
+    }, 3000); //3 segundos
 });

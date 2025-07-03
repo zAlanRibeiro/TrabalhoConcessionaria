@@ -118,6 +118,28 @@ body {
     background-color: #27ae60;
 }
 
+.btn-logout {
+    background-color: #142d70;
+    color: #fff;
+    border: none;
+}
+
+.btn-logout:hover {
+    background-color: #2950bd;
+}
+
+.welcome-message {
+    color: #ecf0f1;
+    font-weight: 500; 
+    font-size: 0.95rem;
+}
+
+.auth-links {
+    display: flex;  
+    align-items: center; 
+    gap: 1rem;           
+}
+
 .main-content {
     display: flex;
     flex-wrap: wrap; 

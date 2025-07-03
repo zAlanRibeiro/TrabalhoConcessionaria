@@ -24,8 +24,13 @@
                 <li><a href="{{ url_for('contato') }}">Contato</a></li>
             </ul>
             <div class="auth-links">
-                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
-                <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
+                {% if session['logged_in'] %}
+                    <span class="welcome-message">Olá, {{ session['user_name'] }}</span>
+                    <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+                    <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
+                {% endif %}
             </div>
         </nav>
     </header>
