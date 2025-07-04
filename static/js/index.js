@@ -52,5 +52,5 @@ flashMessages.forEach(function(message) {
             message.style.display = 'none';
         }, 600); 
 
-    }, 3000); //3 segundos
+    }, 2000); //2 segundos
 });

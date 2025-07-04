@@ -26,8 +26,12 @@
                 <li><a href="{{ url_for('pagamento') }}">Pagamento</a></li>
             </ul>
             <div class="auth-links">
-                {% if session['logged_in'] %}
-                    <span class="welcome-message">Olá, {{ session['user_name'] }}</span>
+                {% if session.get('logged_in') %}
+                    <span class="welcome-message">Olá, {{ session.get('user_name') }}</span>
+                    
+                    {% if session.get('is_admin') %}
+                        <a href="{{ url_for('painel_admin') }}" class="btn btn-login">Painel</a>
+                    {% endif %}
                     <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
                 {% else %}
                     <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
@@ -65,9 +69,9 @@
         <section class="carousel-section">
             <div class="carousel-container">
                 <div class="carousel-images">
-                    <img src="{{ url_for('static', filename='imagens/carro1.jpg') }}" alt="Carro Exemplo 1" class="carousel-image active">
-                    <img src="{{ url_for('static', filename='imagens/carro2.jpg') }}" alt="Carro Exemplo 2" class="carousel-image">
-                    <img src="{{ url_for('static', filename='imagens/carro3.jpg') }}" alt="Carro Exemplo 3" class="carousel-image">
+                    <img src="{{ url_for('static', filename='imagens/carro1.jpeg') }}" alt="Carro Exemplo 1" class="carousel-image active">
+                    <img src="{{ url_for('static', filename='imagens/carro2.jpeg') }}" alt="Carro Exemplo 2" class="carousel-image">
+                    <img src="{{ url_for('static', filename='imagens/carro3.jpeg') }}" alt="Carro Exemplo 3" class="carousel-image">
                 </div>
             </div>
         </section>
