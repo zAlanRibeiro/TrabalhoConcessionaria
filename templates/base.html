@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AutoPrime{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        </header>
+    <nav class="main-nav">
+        </nav>
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="main-footer">
+        <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

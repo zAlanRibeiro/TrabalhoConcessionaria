@@ -3,74 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoPrime - Pagamento</title>
+    <title>AutoPrime - Finalizar Pagamento</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
 </head>
 <body>
     <header class="main-header">
-        <div class="header-content">
-            <div class="logo-area">
-                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
-                <h1 class="site-title visually-hidden">AutoPrime</h1>
-            </div>
-        </div>
-        
-        <nav class="main-nav">
-            <ul class="nav-links">
-                <li><a href="{{ url_for('index') }}">Início</a></li>
-                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
-                <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
-                <li><a href="{{ url_for('contato') }}">Contato</a></li>
-            </ul>
-            <div class="auth-links">
-                {% if session['logged_in'] %}
-                    <span class="welcome-message">Olá, {{ session['user_name'] }}</span>
-                    <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
-                    <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
-                {% endif %}
-            </div>
+        </header>
+    <nav class="main-nav">
         </nav>
-    </header>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages-container">
-          {% for category, message in messages %}
-            <div class="flash-message {{ category }}">
-              {{ message }}
+    <main class="main-content form-page">
+
+        <div class="order-summary">
+            <h3>Resumo da Compra</h3>
+            <div class="summary-details">
+                <img src="{{ url_for('static', filename=veiculo.imagem_url) }}" alt="Imagem do {{ veiculo.modelo }}">
+                <div class="vehicle-info">
+                    <h4>{{ veiculo.marca }} {{ veiculo.modelo }}</h4>
+                    <p>Ano: {{ veiculo.ano }}</p>
+                    <p class="price">R$ {{ "%.2f"|format(veiculo.preco) }}</p>
+                </div>
             </div>
-          {% endfor %}
         </div>
-      {% endif %}
-    {% endwith %}
-
-    <main class="main-content form-page"> <section class="form-section"> <h2>Finalizar Pagamento</h2>
+        <section class="form-section">
+            <h2>Finalizar Pagamento</h2>
             
             <form action="{{ url_for('processar_pagamento') }}" method="POST" class="auth-form">
                 
                 <div class="form-group">
                     <label for="card-holder">Nome no Cartão:</label>
-                    <input type="text" id="card-holder" name="card_holder" required placeholder="Nome completo como no cartão">
+                    <input type="text" id="card-holder" name="card_holder" required placeholder="Nome completo como no cartão" pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s]+" title="Este campo aceita apenas letras e espaços.">
                 </div>
                 
                 <div class="form-group">
                     <label for="card-number">Número do Cartão:</label>
-                    <input type="text" id="card-number" name="card_number" required placeholder="0000 0000 0000 0000">
+                    <input type="text" id="card-number" name="card_number" required placeholder="0000 0000 0000 0000" pattern="[0-9\s]{13,22}" maxlength="22" title="Digite um número de cartão válido (13 a 19 dígitos)." inputmode="numeric">
                 </div>
 
                 <div style="display: flex; gap: 1rem;">
-                    <div class="form-group" style="flex: 3;"> <label for="expiry-date">Validade:</label>
-                        <input type="text" id="expiry-date" name="expiry_date" required placeholder="MM/AA">
+                    <div class="form-group" style="flex: 3;">
+                        <label for="expiry-date">Validade:</label>
+                        <input type="text" id="expiry-date" name="expiry_date" required placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/\d{2}" maxlength="5" title="Digite a data no formato MM/AA (ex: 07/28).">
                     </div>
-                    <div class="form-group" style="flex: 2;"> <label for="cvv">CVV:</label>
-                        <input type="text" id="cvv" name="cvv" required placeholder="123">
+                    <div class="form-group" style="flex: 2;">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" required placeholder="123" pattern="\d{3,4}" maxlength="4" title="Digite o código de 3 ou 4 dígitos." inputmode="numeric">
                     </div>
                 </div>
 
                 <button type="submit" class="btn btn-login full-width">Pagar Agora</button>
+                <a href="{{ url_for('estoque') }}" class="btn btn-secondary full-width" style="margin-top: 10px;">Cancelar Pagamento</a>
                 
                 <p class="form-link">Pagamento seguro e protegido.</p>
             </form>

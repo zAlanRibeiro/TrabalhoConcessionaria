@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Adicionar Veículo{% endblock %}
+
+{% block content %}
+<main class="main-content form-page">
+    <section class="form-section">
+        <h2>Adicionar Novo Veículo ao Estoque</h2>
+        <form action="{{ url_for('adicionar_veiculo') }}" method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required>
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+            </div>
+            <div class="form-group">
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required>
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço (ex: 55000.00):</label>
+                <input type="text" id="preco" name="preco" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagem_url">Caminho da Imagem (ex: imagens/nome_do_arquivo.jpg):</label>
+                <input type="text" id="imagem_url" name="imagem_url" required>
+            </div>
+            <button type="submit" class="btn btn-cadastro full-width">Cadastrar Veículo</button>
+            <a href="{{ url_for('painel_admin') }}" class="btn btn-secondary full-width" style="margin-top: 10px;">Voltar ao Painel</a>
+        </form>
+    </section>
+</main>
+{% endblock %}

@@ -51,20 +51,55 @@
         <section class="page-section">
             <h2>Nosso Estoque de Veículos</h2>
             <p>Explore a nossa vasta seleção de veículos novos e seminovos. Encontre o carro dos seus sonhos na AutoPrime!</p>
+            
+            <form method="GET" action="{{ url_for('estoque') }}" class="filter-form" style="display: flex; gap: 1rem; margin-bottom: 2rem; background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+            
+                <div class="form-group" style="flex: 1;">
+                    <label for="marca">Marca:</label>
+                    <select name="marca" id="marca" class="form-control">
+                        <option value="">Todas</option>
+                        {% for marca_item in marcas %}
+                            <option value="{{ marca_item[0] }}" {% if marca_item[0] == search_params.get('marca') %}selected{% endif %}>
+                                {{ marca_item[0] }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group" style="flex: 1;">
+                    <label for="preco_min">Preço Mínimo:</label>
+                    <input type="number" name="preco_min" id="preco_min" class="form-control" placeholder="R$" value="{{ search_params.get('preco_min', '') }}" step="1000">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label for="preco_max">Preço Máximo:</label>
+                    <input type="number" name="preco_max" id="preco_max" class="form-control" placeholder="R$" value="{{ search_params.get('preco_max', '') }}" step="1000">
+                </div>
+
+                <div style="display: flex; align-items: flex-end;">
+                    <button type="submit" class="btn btn-login">Filtrar</button>
+                </div>
+            </form>
             <div class="vehicle-list">
-                <div class="vehicle-item">
-                    <h3>Carro Exemplo 1</h3>
-                    <p>Marca: SedanX | Ano: 2023 | Preço: R$ 85.000</p>
-                    <img src="{{ url_for('static', filename='imagens/carro_placeholder_1.jpg') }}" alt="Carro Exemplo" style="max-width: 100%; height: auto;">
-                    <a href="#" class="btn btn-login">Ver Detalhes</a>
-                </div>
-                <div class="vehicle-item">
-                    <h3>Carro Exemplo 2</h3>
-                    <p>Marca: SUVY | Ano: 2024 | Preço: R$ 120.000</p>
-                    <img src="{{ url_for('static', filename='imagens/carro_placeholder_2.jpg') }}" alt="Carro Exemplo" style="max-width: 100%; height: auto;">
-                    <a href="#" class="btn btn-login">Ver Detalhes</a>
-                </div>
-                </div>
+                {% for veiculo in veiculos %}
+                    <div class="vehicle-item">
+                        <img src="{{ url_for('static', filename=veiculo.imagem_url) }}" alt="{{ veiculo.marca }} {{ veiculo.modelo }}">
+                        
+                        <div class="vehicle-item-content">
+                            <h3>{{ veiculo.marca }} {{ veiculo.modelo }}</h3>
+                            <p class="vehicle-details">Ano: {{ veiculo.ano }}</p>
+                            <p class="vehicle-price">R$ {{ "%.2f"|format(veiculo.preco) }}</p>
+                            <p class="vehicle-description">{{ veiculo.descricao }}</p>
+                        </div>
+                        
+                        <div class="vehicle-actions">
+                            <a href="{{ url_for('pagamento', veiculo_id=veiculo.id) }}" class="btn btn-comprar" style="flex: 1;">Comprar</a>
+                            <a href="#" class="btn btn-agendar">Agendar Test Drive</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <p style="text-align: center; width: 100%;">Nenhum veículo encontrado no estoque no momento.</p>
+                {% endfor %}
+            </div>
         </section>
     </main>
     

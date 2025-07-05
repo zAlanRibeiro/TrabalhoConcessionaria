@@ -115,3 +115,14 @@
     opacity: 0;
     transition: opacity 0.6s ease-out;
 }
+
+.btn-secondary {
+    background-color: #7f8c8d; 
+    color: #fff;
+    border: none;
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background-color: #95a5a6;
+}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Veículo{% endblock %}
+
+{% block content %}
+<main class="main-content form-page">
+    <section class="form-section">
+        <h2>Editar Veículo do Estoque</h2>
+        <form action="{{ url_for('editar_veiculo', veiculo_id=veiculo.id) }}" method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca" required value="{{ veiculo.marca }}">
+            </div>
+            <div class="form-group">
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required value="{{ veiculo.modelo }}">
+            </div>
+            <div class="form-group">
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" name="ano" required value="{{ veiculo.ano }}">
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço:</label>
+                <input type="text" id="preco" name="preco" required value="{{ veiculo.preco }}">
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" rows="4">{{ veiculo.descricao }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagem_url">Caminho da Imagem:</label>
+                <input type="text" id="imagem_url" name="imagem_url" required value="{{ veiculo.imagem_url }}">
+            </div>
+            <button type="submit" class="btn btn-cadastro full-width">Salvar Alterações</button>
+            <a href="{{ url_for('painel_admin') }}" class="btn btn-secondary full-width" style="margin-top: 10px;">Cancelar</a>
+        </form>
+    </section>
+</main>
+{% endblock %}

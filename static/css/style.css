@@ -90,12 +90,17 @@ body {
 }
 
 .btn {
-    display: inline-block;
-    padding: 0.6rem 1.2rem;
+    display: inline-flex;       
+    justify-content: center;    
+    align-items: center;        
+    padding: 10px 15px;        
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;        
+    border: none;               
+    cursor: pointer;
 }
 
 .btn-login {
@@ -126,6 +131,35 @@ body {
 
 .btn-logout:hover {
     background-color: #2950bd;
+}
+
+.btn-comprar {
+    background-color: #27ae60; 
+    color: white;
+}
+
+.btn-comprar:hover {
+    background-color: #229954; 
+}
+
+.btn-agendar {
+    background-color: #34495e;
+    color: white;
+}
+
+.btn-agendar:hover {
+    background-color: #2c3e50;
+}
+
+.admin-table .btn-action {
+    box-sizing: border-box !important;
+    width: 85px !important;
+    
+    padding: 0 !important;
+    line-height: 35px;
+
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .welcome-message {
@@ -269,4 +303,126 @@ body {
     .carousel-section {
         min-width: unset; 
     }
+
+}
+
+.vehicle-list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 2rem;       
+    justify-content: center; 
+}
+
+.vehicle-item {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    width: 320px; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vehicle-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; 
+}
+
+.vehicle-item-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-item-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+}
+
+.vehicle-item-content .vehicle-details {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 0.75rem;
+}
+
+.vehicle-item-content .vehicle-price {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #27ae60;
+    margin-bottom: 1rem;
+}
+
+.vehicle-item-content .vehicle-description {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+.vehicle-actions {
+    display: flex;
+    gap: 10px;
+    padding: 0 1rem 1rem 1rem; 
+    margin-top: auto; 
+}
+
+.vehicle-actions .btn {
+    flex: 1; 
+    text-align: center;
+}
+
+.order-summary {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+        
+.order-summary h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #34495e;
+}
+        
+.summary-details {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+        
+.summary-details img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+        
+.summary-details .vehicle-info h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+        
+.summary-details .vehicle-info p {
+    margin: 0.25rem 0;
+    color: #666;
+}
+        
+.summary-details .vehicle-info .price {
+    margin-top: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #27ae60;
 }
