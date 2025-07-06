@@ -6,13 +6,53 @@
     <title>{% block title %}AutoPrime{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header class="main-header">
-        </header>
+        <div class="header-content">
+            <div class="logo-area">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
+                </a>
+            </div>
+        </div>
+    </header>
+
     <nav class="main-nav">
-        </nav>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Início</a></li>
+            <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
+            <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
+            <li><a href="{{ url_for('contato') }}">Contato</a></li>
+        </ul>
+        <div class="auth-links">
+            {% if session.get('logged_in') %}
+                <span class="welcome-message">Olá, {{ session.get('user_name') }}</span>
+                <a href="{{ url_for('perfil') }}" class="nav-profile-link">Meu Perfil</a>
+                {% if session.get('is_admin') %}
+                    <a href="{{ url_for('painel_admin') }}" class="btn btn-login">Painel</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
+                <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
+            {% endif %}
+        </div>
+    </nav>
     
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages-container" style="position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 1050; width: 80%; max-width: 600px;">
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}" style="margin-bottom: 10px;">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
     <main>
         {% block content %}{% endblock %}
     </main>

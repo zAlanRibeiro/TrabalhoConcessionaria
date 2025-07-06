@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+/* ============================================= */
+/* --- GERAL E RESET --- */
+/* ============================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -16,6 +20,9 @@ body {
     min-height: 100vh; 
 }
 
+/* ============================================= */
+/* --- CABEÇALHO E NAVEGAÇÃO --- */
+/* ============================================= */
 
 .main-header {
     background-color: #2c3e50; 
@@ -26,7 +33,7 @@ body {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -40,14 +47,8 @@ body {
 }
 
 .logo {
-    width: 60px; 
+    width: 400px; 
     height: auto;
-}
-
-.site-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #ecf0f1; 
 }
 
 .tagline {
@@ -85,20 +86,50 @@ body {
 }
 
 .auth-links {
-    display: flex;
-    gap: 1rem;
+    display: flex; 
+    align-items: center; 
+    gap: 1rem;       
 }
 
+.welcome-message {
+    color: #ecf0f1;
+    font-weight: 500; 
+    font-size: 0.95rem;
+}
+
+.nav-profile-link {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-profile-link:hover {
+    color: #1abc9c;
+    text-decoration: underline;
+}
+
+.nav-center .logo {
+    width: 200px; 
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+}
+
+/* ============================================= */
+/* --- BOTÕES --- */
+/* ============================================= */
+
 .btn {
-    display: inline-flex;       
+    display: inline-flex;     
     justify-content: center;    
     align-items: center;        
-    padding: 10px 15px;        
+    padding: 10px 15px;         
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
-    text-align: center;        
+    text-align: center;         
     border: none;               
     cursor: pointer;
 }
@@ -106,7 +137,6 @@ body {
 .btn-login {
     background-color: #3498db;
     color: #fff;
-    border: none;
 }
 
 .btn-login:hover {
@@ -116,7 +146,6 @@ body {
 .btn-cadastro {
     background-color: #2ecc71;
     color: #fff;
-    border: none;
 }
 
 .btn-cadastro:hover {
@@ -124,13 +153,12 @@ body {
 }
 
 .btn-logout {
-    background-color: #142d70;
+    background-color: #e74c3c;
     color: #fff;
-    border: none;
 }
 
 .btn-logout:hover {
-    background-color: #2950bd;
+    background-color: #c0392b;
 }
 
 .btn-comprar {
@@ -142,37 +170,18 @@ body {
     background-color: #229954; 
 }
 
-.btn-agendar {
+.btn-agendar, .btn-secondary {
     background-color: #34495e;
     color: white;
 }
 
-.btn-agendar:hover {
+.btn-agendar:hover, .btn-secondary:hover {
     background-color: #2c3e50;
 }
 
-.admin-table .btn-action {
-    box-sizing: border-box !important;
-    width: 85px !important;
-    
-    padding: 0 !important;
-    line-height: 35px;
-
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.welcome-message {
-    color: #ecf0f1;
-    font-weight: 500; 
-    font-size: 0.95rem;
-}
-
-.auth-links {
-    display: flex;  
-    align-items: center; 
-    gap: 1rem;           
-}
+/* ============================================= */
+/* --- CONTEÚDO PRINCIPAL E LAYOUT --- */
+/* ============================================= */
 
 .main-content {
     display: flex;
@@ -188,26 +197,89 @@ body {
     flex-grow: 1; 
 }
 
+.page-section {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+.page-intro {
+    max-width: 650px;       
+    margin: 0 auto 2rem auto; 
+    color: #666;             
+}
+
+
+/* ============================================= */
+/* --- PÁGINA INICIAL (HOME) --- */
+/* ============================================= */
+
 .about-section {
     flex: 2; 
-    min-width: 300px; 
-    padding-right: 1rem;
-    border-right: 1px solid #eee; 
+    min-width: 350px;
+    padding-right: 2rem;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
 }
 
 .about-section h2 {
     color: #2c3e50;
     margin-bottom: 1rem;
     font-size: 1.8rem;
+    text-align: left;
 }
 
 .about-section p {
     margin-bottom: 1rem;
-    text-align: justify;
+    text-align: left;
+}
+
+.highlights-container {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.highlight-item i {
+    font-size: 1.5rem;
+    color: #3498db;
+    margin-top: 5px;
+    width: 30px;
+}
+
+.highlight-item h4 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.highlight-item p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.cta-buttons .btn {
+    flex: 1;
 }
 
 .carousel-section {
-    flex: 1; 
+    flex: 1;
     min-width: 300px; 
     display: flex;
     justify-content: center;
@@ -264,47 +336,9 @@ body {
     right: 10px;
 }
 
-
-.main-footer {
-    background-color: #2c3e50;
-    color: #fff;
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.9rem;
-    margin-top: auto;
-}
-
-@media (max-width: 768px) {
-    .header-content,
-    .main-nav {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .main-content {
-        flex-direction: column; 
-        padding: 1rem;
-        gap: 1rem;
-    }
-
-    .about-section {
-        padding-right: 0;
-        border-right: none;
-        border-bottom: 1px solid #eee; 
-        padding-bottom: 1rem;
-    }
-
-    .carousel-section {
-        min-width: unset; 
-    }
-
-}
+/* ============================================= */
+/* --- PÁGINA ESTOQUE --- */
+/* ============================================= */
 
 .vehicle-list {
     display: flex;
@@ -377,8 +411,56 @@ body {
 
 .vehicle-actions .btn {
     flex: 1; 
-    text-align: center;
 }
+
+
+/* ============================================= */
+/* --- PÁGINA SERVIÇOS --- */
+/* ============================================= */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.service-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.service-card i {
+    font-size: 3rem;
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.service-card h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
+    color: #2c3e50;
+}
+
+.service-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* ============================================= */
+/* --- COMPONENTES ESPECÍFICOS (PAGAMENTO, ADMIN) --- */
+/* ============================================= */
 
 .order-summary {
     width: 100%;
@@ -425,4 +507,61 @@ body {
     font-size: 1.4rem;
     font-weight: bold;
     color: #27ae60;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: white;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.status-disponivel {
+    background-color: #27ae60; 
+}
+
+.status-vendido {
+    background-color: #c0392b; 
+}
+
+
+/* ============================================= */
+/* --- RODAPÉ --- */
+/* ============================================= */
+
+.main-footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* ============================================= */
+/* --- REGRAS DE IMPRESSÃO E RESPONSIVIDADE --- */
+/* ============================================= */
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column; 
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .about-section {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid #eee; 
+        padding-bottom: 1rem;
+    }
 }

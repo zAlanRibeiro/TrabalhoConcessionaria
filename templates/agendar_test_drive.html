@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Agendar Test Drive{% endblock %}
+
+{% block content %}
+<main class="main-content form-page">
+
+    <div class="order-summary">
+        <h3>Agendamento de Test Drive</h3>
+        <div class="summary-details">
+            <img src="{{ url_for('static', filename=veiculo.imagem_url) }}" alt="Imagem do {{ veiculo.modelo }}">
+            <div class="vehicle-info">
+                <h4>{{ veiculo.marca }} {{ veiculo.modelo }}</h4>
+                <p>Ano: {{ veiculo.ano }}</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="form-section">
+        <h2>Escolha a Data e Hora</h2>
+        <form action="{{ url_for('agendar_test_drive', veiculo_id=veiculo.id) }}" method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="data_agendamento">Data e Hora do Test Drive:</label>
+                <input type="datetime-local" id="data_agendamento" name="data_agendamento" required>
+            </div>
+            <button type="submit" class="btn btn-cadastro full-width">Confirmar Agendamento</button>
+            <a href="{{ url_for('estoque') }}" class="btn btn-secondary full-width" style="margin-top: 10px;">Cancelar</a>
+        </form>
+    </section>
+</main>
+{% endblock %}

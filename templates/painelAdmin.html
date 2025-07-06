@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block title %}Painel do Admin{% endblock %}
+{% extends "base.html" %} 
+
+{% block title %}Painel do Admin{% endblock %}
 
 {% block content %}
 <main class="main-content">
@@ -14,13 +16,15 @@
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>| ID |</th>
-                    <th> Imagem |</th>
-                    <th> Marca |</th>
-                    <th> Modelo |</th>
-                    <th> Ano |</th>
-                    <th> Preço |</th>
-                    <th> Ações |</th>
+                    <th>ID</th>
+                    <th>Imagem</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Cor</th>
+                    <th>Ano</th>
+                    <th>Preço</th>
+                    <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,8 +34,18 @@
                     <td><img src="{{ url_for('static', filename=veiculo.imagem_url) }}" alt="Imagem do {{ veiculo.modelo }}" width="100"></td>
                     <td>{{ veiculo.marca }}</td>
                     <td>{{ veiculo.modelo }}</td>
+                    <td>{{ veiculo.cor }}</td>
                     <td>{{ veiculo.ano }}</td>
                     <td>R$ {{ "%.2f"|format(veiculo.preco) }}</td>
+
+                    <td>
+                        {% if veiculo.status == 'Disponível' %}
+                            <span class="status status-disponivel">Disponível</span>
+                        {% else %}
+                            <span class="status status-vendido">Vendido</span>
+                        {% endif %}
+                    </td>
+                    
                     <td>
                         <a href="{{ url_for('editar_veiculo', veiculo_id=veiculo.id) }}" class="btn btn-login btn-sm btn-action">Editar</a>
                         
@@ -42,7 +56,7 @@
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="7" style="text-align: center;">Nenhum veículo cadastrado no estoque.</td>
+                    <td colspan="9" style="text-align: center;">Nenhum veículo cadastrado no estoque.</td>
                 </tr>
                 {% endfor %}
             </tbody>

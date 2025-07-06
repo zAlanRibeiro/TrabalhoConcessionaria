@@ -1,85 +1,53 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>AutoPrime - Concessionária</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}" />
-</head>
-<body>
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo-area">
-                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
-                <h1 class="site-title visually-hidden">AutoPrime</h1>
-            </div>
-            <p class="tagline">Seu próximo carro está aqui</p>
-        </div>
+{% extends "base.html" %}
 
-        <nav class="main-nav">
-            <ul class="nav-links">
-                <li><a href="{{ url_for('index') }}">Início</a></li>
-                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
-                <li><a href="{{ url_for('servicos') }}">Serviços</a></li>
-                <li><a href="{{ url_for('contato') }}">Contato</a></li>
-            </ul>
-            <div class="auth-links">
-                {% if session.get('logged_in') %}
-                    <span class="welcome-message">Olá, {{ session.get('user_name') }}</span>
-                    
-                    {% if session.get('is_admin') %}
-                        <a href="{{ url_for('painel_admin') }}" class="btn btn-login">Painel</a>
-                    {% endif %}
-                    <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
-                    <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
-                {% endif %}
-            </div>
-        </nav>
-    </header>
+{% block title %}AutoPrime - Concessionária{% endblock %}
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages-container">
-          {% for category, message in messages %}
-            <div class="flash-message {{ category }}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
-    <main class="main-content">
-        <section class="about-section">
-            <h2>Bem-vindo à AutoPrime!</h2>
-            <p>
-                Na AutoPrime, entendemos que adquirir um veículo é mais do que uma simples compra; é a realização de um sonho, a busca por novas experiências e a certeza de mobilidade. Nossa missão é conectar você ao carro ideal, oferecendo um estoque diversificado de veículos de alta qualidade, desde os mais econômicos até os modelos de luxo mais sofisticados.
-            </p>
-            <p>
-                Com anos de experiência no mercado, a AutoPrime se orgulha de sua equipe de especialistas dedicados, prontos para oferecer um atendimento personalizado e transparente. Acreditamos na construção de relacionamentos duradouros com nossos clientes, baseados na confiança e na excelência.
-            </p>
-            <p>
-                Navegue pelo nosso site para explorar nosso estoque, agendar um test drive ou entrar em contato com nossa equipe. Estamos aqui para tornar sua jornada automotiva inesquecível!
-            </p>
-        </section>
+{% block content %}
+<div class="main-content">
+    <section class="about-section">
+        <h2>Bem-vindo à AutoPrime!</h2>
+        <p class="page-intro" style="text-align: left; margin: 0 0 1.5rem 0;">
+            Na AutoPrime, entendemos que adquirir um veículo é mais do que uma simples compra; é a realização de um sonho. Nossa missão é conectar você ao carro ideal.
+        </p>
 
-        <section class="carousel-section">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="{{ url_for('static', filename='imagens/carro1.jpeg') }}" alt="Carro Exemplo 1" class="carousel-image active">
-                    <img src="{{ url_for('static', filename='imagens/carro2.jpeg') }}" alt="Carro Exemplo 2" class="carousel-image">
-                    <img src="{{ url_for('static', filename='imagens/carro3.jpeg') }}" alt="Carro Exemplo 3" class="carousel-image">
+        <div class="highlights-container">
+            <div class="highlight-item">
+                <i class="fa-solid fa-car-on"></i>
+                <div>
+                    <h4>Estoque Diversificado</h4>
+                    <p>Dos econômicos aos modelos de luxo mais sofisticados.</p>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="highlight-item">
+                <i class="fa-solid fa-handshake-simple"></i>
+                <div>
+                    <h4>Atendimento Personalizado</h4>
+                    <p>Construímos relacionamentos baseados na confiança e transparência.</p>
+                </div>
+            </div>
+            <div class="highlight-item">
+                <i class="fa-solid fa-star"></i>
+                <div>
+                    <h4>Excelência e Qualidade</h4>
+                    <p>Anos de experiência e uma equipe de especialistas dedicados a você.</p>
+                </div>
+            </div>
+        </div>
 
-    <footer class="main-footer">
-        <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
-    </footer>
+        <div class="cta-buttons">
+            <a href="{{ url_for('estoque') }}" class="btn btn-comprar">Ver Nosso Estoque</a>
+            <a href="{{ url_for('contato') }}" class="btn btn-secondary">Fale Conosco</a>
+        </div>
+    </section>
 
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-</body>
-</html>
+    <section class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-images">
+                <img src="{{ url_for('static', filename='imagens/carro1.jpeg') }}" alt="Carro de luxo" class="carousel-image active">
+                <img src="{{ url_for('static', filename='imagens/carro2.jpeg') }}" alt="Interior de carro" class="carousel-image">
+                <img src="{{ url_for('static', filename='imagens/carro3.jpeg') }}" alt="Carro esportivo" class="carousel-image">
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

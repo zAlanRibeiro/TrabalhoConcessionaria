@@ -1,70 +1,54 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoPrime - Nossos Serviços</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
-</head>
-<body>
-    <header class="main-header">
-        <div class="header-content">
-            <div class="logo-area">
-                <img src="{{ url_for('static', filename='imagens/AutoPrime.png') }}" alt="Logo AutoPrime" class="logo">
-                <h1 class="site-title visually-hidden">AutoPrime</h1>
+{% extends "base.html" %}
+
+{% block title %}AutoPrime - Nossos Serviços{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <section class="page-section">
+        <h2>Serviços Automotivos da AutoPrime</h2>
+        <p class="page-intro">
+            Na AutoPrime, oferecemos uma gama completa de serviços...
+        </p>
+
+        <div class="services-grid">
+            
+            <div class="service-card">
+                <i class="fa-solid fa-hand-holding-dollar"></i>
+                <h3>Financiamento Facilitado</h3>
+                <p>Opções flexíveis de crédito e as melhores taxas para você realizar o seu sonho.</p>
             </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                <h3>Avaliação de Usados</h3>
+                <p>Troque seu carro usado por um novo com a melhor e mais justa avaliação do mercado.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-car-side"></i>
+                <h3>Test Drive Agendado</h3>
+                <p>Experimente seu futuro carro na prática. Agende um test drive de forma simples e rápida.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>Pós-Venda e Manutenção</h3>
+                <p>Oferecemos suporte completo com revisões e manutenções para seu veículo após a compra.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Consórcio e Seguros</h3>
+                <p>Soluções completas e parcerias com as melhores seguradoras para proteger seu investimento.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fa-solid fa-headset"></i>
+                <h3>Atendimento Personalizado</h3>
+                <p>Entre em contato para saber mais sobre como podemos te ajudar a encontrar o carro perfeito.</p>
+            </div>
+
         </div>
-        
-        <nav class="main-nav">
-            <ul class="nav-links">
-                <li><a href="{{ url_for('index') }}">Início</a></li>
-                <li><a href="{{ url_for('estoque') }}">Estoque</a></li>
-                <li><a href="{{ url_for('servicos') }}">Serviços</a></li> 
-                <li><a href="{{ url_for('contato') }}">Contato</a></li>
-            </ul>
-            <div class="auth-links">
-                {% if session['logged_in'] %}
-                    <span class="welcome-message">Olá, {{ session['user_name'] }}</span>
-                    <a href="{{ url_for('logout') }}" class="btn btn-logout">Sair</a>
-                {% else %}
-                    <a href="{{ url_for('login') }}" class="btn btn-login">Login</a>
-                    <a href="{{ url_for('cadastro') }}" class="btn btn-cadastro">Cadastro</a>
-                {% endif %}
-            </div>
-        </nav>
-    </header>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash-messages-container">
-          {% for category, message in messages %}
-            <div class="flash-message {{ category }}">
-              {{ message }}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
-
-    <main class="main-content">
-        <section class="page-section">
-            <h2>Serviços Automotivos da AutoPrime</h2>
-            <p>Na AutoPrime, oferecemos uma gama completa de serviços para garantir a sua satisfação e a longevidade do seu veículo.</p>
-            <ul>
-                <li>Financiamento Facilitado: Opções flexíveis para você realizar o seu sonho.</li>
-                <li>Avaliação de Usados: Troque seu carro com a melhor avaliação do mercado.</li>
-                <li>Test Drive Agendado: Experimente o seu futuro carro antes de decidir.</li>
-                <li>Pós-Venda e Manutenção: Suporte completo após a compra.</li>
-                <li>Consórcio e Seguros: Soluções completas para proteger seu investimento.</li>
-            </ul>
-            <p>Entre em contato para saber mais sobre como podemos te ajudar!</p>
-        </section>
-    </main>
-    
-    <footer class="main-footer">
-        <p>AutoPrime &copy; 2025 - Todos os direitos reservados.</p>
-    </footer>
-
-    </body>
-</html>
+    </section>
+</div>
+{% endblock %}

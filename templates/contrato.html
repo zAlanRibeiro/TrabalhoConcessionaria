@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Contrato de Compra e Venda{% endblock %}
+
+{% block content %}
+<main class="main-content" style="max-width: 800px;">
+    <section class="page-section">
+        
+        <div class="contract-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ccc; padding-bottom: 1rem; margin-bottom: 2rem;">
+            
+            <a href="{{ url_for('index') }}" class="btn btn-secondary no-print" style="margin-right: 20px;">Voltar</a>
+            
+            <h2 style="margin: 0;">Contrato de Compra e Venda</h2>
+            
+            <div style="width: 150px;"></div>
+        </div>
+        <h4>DADOS DO COMPRADOR:</h4>
+        <p><strong>Nome:</strong> {{ venda.cliente.nome }}</p>
+        <p><strong>CPF:</strong> {{ venda.cliente.cpf }}</p>
+        <p><strong>Endereço:</strong> {{ venda.cliente.endereco }}</p>
+        <p><strong>Telefone:</strong> {{ venda.cliente.telefone }}</p>
+        <p><strong>Email:</strong> {{ venda.cliente.email }}</p>
+
+        <hr style="margin: 2rem 0;">
+
+        <h4>DADOS DO VEÍCULO:</h4>
+        <p><strong>Marca/Modelo:</strong> {{ venda.veiculo.marca }} {{ venda.veiculo.modelo }}</p>
+        <p><strong>Ano:</strong> {{ venda.veiculo.ano }}</p>
+        <p><strong>Cor:</strong> {{ venda.veiculo.cor }}</p>
+        <p><strong>Descrição:</strong> {{ venda.veiculo.descricao }}</p>
+
+        <hr style="margin: 2rem 0;">
+
+        <h4>DADOS DA TRANSAÇÃO:</h4>
+        <p><strong>Data da Venda:</strong> {{ venda.data_venda.strftime('%d/%m/%Y às %H:%M') }}</p>
+        <p><strong>Valor Final:</strong> R$ {{ "%.2f"|format(venda.preco_final) }}</p>
+
+        <div style="margin-top: 4rem; text-align: center;">
+            <p>_________________________________________</p>
+            <p>{{ venda.cliente.nome }}</p>
+            <br><br>
+            <p>_________________________________________</p>
+            <p>AutoPrime Concessionária</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button onclick="window.print();" class="btn btn-login no-print">Imprimir / Salvar PDF</button>
+        </div>
+    </section>
+</main>
+{% endblock %}
