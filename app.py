@@ -5,6 +5,7 @@ from functools import wraps
 import re
 from sqlalchemy import distinct
 from datetime import datetime
+from flask_migrate import Migrate
 
 app = Flask(__name__) 
 
@@ -15,6 +16,7 @@ app.secret_key = 'be6b8535e881eb6974fa7d60ff055c96ccf65f451edabd83'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # --- DECORATORS ---
 def login_required(f):
@@ -43,7 +45,6 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# --- MODELOS DO BANCO DE DADOS ---
 class Usuario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
@@ -53,13 +54,12 @@ class Usuario(db.Model):
     cpf = db.Column(db.String(20), unique=True, nullable=False)
     endereco = db.Column(db.String(200), nullable=False)
     telefone = db.Column(db.String(20), nullable=False)
-
     def set_senha(self, senha):
         self.senha_hash = generate_password_hash(senha)
 
     def check_senha(self, senha):
         return check_password_hash(self.senha_hash, senha)
-    
+
 class Estoque(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     marca = db.Column(db.String(100), nullable=False)
@@ -70,6 +70,20 @@ class Estoque(db.Model):
     imagem_url = db.Column(db.String(200), nullable=False)
     cor = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(20), nullable=False, default='Disponível')
+    test_drives = db.relationship(
+        'TestDrive', 
+        backref='veiculo', 
+        lazy=True, 
+        cascade="all, delete-orphan"
+    )
+
+    venda = db.relationship(
+        'Venda',
+        backref='veiculo',
+        uselist=False,
+        cascade="all, delete-orphan"
+    )
+
 
 class TestDrive(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,16 +91,14 @@ class TestDrive(db.Model):
     cliente_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     veiculo_id = db.Column(db.Integer, db.ForeignKey('estoque.id'), nullable=False)
     cliente = db.relationship('Usuario', backref=db.backref('test_drives', lazy=True))
-    veiculo = db.relationship('Estoque', backref=db.backref('test_drives', lazy=True))
 
-class Venda(db.Model): # <-- MELHORIA: Removido comentário desnecessário
+class Venda(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data_venda = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     preco_final = db.Column(db.Float, nullable=False)
     cliente_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
     veiculo_id = db.Column(db.Integer, db.ForeignKey('estoque.id'), nullable=False, unique=True)
     cliente = db.relationship('Usuario', backref='compras')
-    veiculo = db.relationship('Estoque', backref='venda')
 
 # --- ROTAS DA APLICAÇÃO ---
 
