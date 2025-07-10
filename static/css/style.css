@@ -546,22 +546,21 @@ body {
 /* ============================================= */
 
 @media print {
-    .no-print {
+
+    .site-header, .main-nav, .main-footer, .no-print {
         display: none !important;
     }
-}
 
-@media (max-width: 768px) {
-    .main-content {
-        flex-direction: column; 
-        padding: 1rem;
-        gap: 1rem;
+    body {
+        background-color: #fff !important; 
     }
 
-    .about-section {
-        padding-right: 0;
-        border-right: none;
-        border-bottom: 1px solid #eee; 
-        padding-bottom: 1rem;
+    main, .main-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
     }
 }
